@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .navLink-active {
+    @apply text-white bg-primary  rounded-full;
+  }
+
+  .subMenu {
+    @apply fixed left-1/2 -translate-x-1/2 right-0 z-50 w-screen max-w-96 bg-white text-center space-y-2 divide-y-2 overflow-scroll rounded-t-lg max-h-64 h-max divide-primary border-2 border-primary;
+  }
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
