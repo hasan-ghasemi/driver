@@ -148,17 +148,16 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      console.log(res.data)
       if (!res || res.status !== 200) {
         codeText.value = "خطا در صحت سنجی کد تایید";
         appStore.showAlert(true, "مشکلی در صحت سنجی کد تایید بوجود آمده است");
-      }else if(res.data.data.profile.full_name || res.data.data.national_id){
+      }else if(!res.data.data.profile.full_name || !res.data.data.national_id){
+        Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
+        navigateTo("/Auth/CreateProfile");
+      } else if (res.data.data.token) {
         authStore.saveUserData(res.data.data.profile);
         Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
         navigateTo("/profile")
-      } else if (res.data.data.token) {
-        Cookie.set("token", res.data.data.token, { expires: 30, path: "/" });
-        navigateTo("/Auth/CreateProfile");
       }
     }
   });
