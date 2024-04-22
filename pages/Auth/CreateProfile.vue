@@ -21,7 +21,7 @@
           @input="validateForm()"
         />
         <input
-          v-model="userName"
+          v-model.trim="userName"
           ref="userNameInput"
           type="text"
           class="p-4 outline-none w-80 shadow rounded-md"
@@ -29,7 +29,7 @@
           placeholder="نام و نام خانوادگی"
         />
         <input
-          v-model="userCode"
+          v-model.trim="userCode"
           ref="userCodeInput"
           type="text"
           class="p-4 outline-none w-80 shadow rounded-md"
@@ -71,17 +71,15 @@ watch([userName, userCode], () => {
 });
 
 function validateForm() {
-  if (userName.value.trim().length < 8) {
+  if (userName.value.length < 8) {
     errorMsg.value.textContent =
       "نام و نام خانوادگی نمی‌تواند کمتر از 8 حرف باشد";
-  } else if (userName.value.trim().split(" ").length < 2) {
+  } else if (userName.value.split(" ").length < 2) {
     errorMsg.value.textContent = "نام و نام خانوادگی صحیح نیست";
-  } else if (userCode.value.trim().length <= 9) {
+  } else if (userCode.value.length <= 9) {
     errorMsg.value.textContent = "کد ملی نمی‌تواند کمتر از 9 حرف باشد";
   } else if (isNaN(userCode.value.trim())) {
     errorMsg.value.textContent = "کد ملی می‌تواند تنها شامل اعداد باشد";
-  } else if (!fileInput.value.files[0]) {
-    errorMsg.value.textContent = "یک عکس انتخاب کنید";
   } else {
     errorMsg.value.textContent = "";
     isError.value = false;
