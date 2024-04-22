@@ -72,9 +72,8 @@ const loginTitle = computed(() => {
     return "ورود راننده";
   } else if (route.query.type == "shipper") {
     return "ورود صاحب بار";
-  } else {
-    return "ورود";
   }
+  return "ورود";
 });
 
 function validateMobileNumber() {
@@ -104,9 +103,7 @@ onMounted(() => {
 
 async function login() {
   // validate mobile number
-  if (validateMobileNumber() == false) {
-    return;
-  }
+  if (!validateMobileNumber()) return;
   //  save data in store(pinia)
   authStore.saveLoginData({
     mobile: prefixMobile.value,

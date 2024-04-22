@@ -148,7 +148,6 @@ async function checkToken() {
         },
         newHeader: {},
       });
-      console.log(res.data)
       if (!res || res.status !== 200) {
         codeText.value = "خطا در صحت سنجی کد تایید";
         appStore.showAlert(true, "مشکلی در صحت سنجی کد تایید بوجود آمده است");
