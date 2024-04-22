@@ -10,6 +10,8 @@ export const useAuthStore = defineStore("auth", {
       user: {
         profile_image: "",
         isActive: null,
+        full_name: null,
+        national_id: null,
       },
       location: {
         long: null,
