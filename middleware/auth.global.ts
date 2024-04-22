@@ -8,6 +8,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   if (to.path === "/" && token) {
     return navigateTo("/profile");
+  } else if (!authStore.user.full_name || !authStore.user.national_id) {
+    return navigateTo("/Auth/CreateProfile");
   } else if (
     to.fullPath.includes("/Auth") &&
     token &&
