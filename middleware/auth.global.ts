@@ -5,18 +5,16 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const token = cookies.value;
   const authStore = useAuthStore();
   const isAuth = computed(() => authStore.user.isActive);
-
-  if (to.path === "/" && token) {
+  
+  if (to.path === "/" && token && authStore.user.full_name != " ") {
     return navigateTo("/profile");
-  } else if (!authStore.user.full_name || !authStore.user.national_id) {
-    return navigateTo("/Auth/CreateProfile");
-  } else if (
+} else if (
     to.fullPath.includes("/Auth") &&
     token &&
-    from.path !== "/Auth/Verify"
+    authStore.user.full_name != " "
   ) {
     return navigateTo("/profile");
-  } else if (to.path === "profile") {
+  } else if (to.path === "profile" && authStore.user.full_name != " ") {
     return;
   } else if (to.fullPath.includes("/profile") && !token && !isAuth.value) {
     return navigateTo("/Auth");
