@@ -235,13 +235,18 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+definePageMeta({
+  middleware: 'profile'
+})
+
 import locationHandler from "~/composables/location";
 const authStore = useAuthStore();
 
 const showMenu = ref(false);
 
 const isAuth = computed(() => authStore.user.isActive);
+
 
 onMounted( () => {
   locationHandler();
